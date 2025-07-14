@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Safe</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/scrollbar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="board-header-bar">
+        <span class="board-title">Social Safe</span>
+        <span class="board-category">Education Games</span>
+    </div>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>Lumyx</h1>
+            <div class="game-controls">
+                <button id="rulesBtn" class="btn btn-secondary">Aturan</button>
+                <button id="restartGame" class="btn btn-primary">Mulai Ulang</button>
+            </div>
+        </header>
+
+        <main class="game-board-container">
+            <div class="game-board-scroll">
+                <div class="game-board">
+                    <!-- Papan permainan akan dibuat secara dinamis dengan JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Overlay dan container untuk kartu di tengah board -->
+            <div class="card-overlay" id="cardOverlay"></div>
+            <div class="card-display-container" id="cardDisplayContainer">
+                <div class="card-display">
+                    <div class="chance-card" id="displayedCard">
+                        <!-- Bagian depan kartu -->
+                        <div class="chance-card-front" id="cardFront">
+                            <div class="chance-card-title" id="frontCardTitle">KARTU</div>
+                            <div class="chance-card-icon" id="frontCardIcon">?</div>
+                            <div class="chance-card-subtitle">SOCISAFE</div>
+                        </div>
+                        
+                        <!-- Bagian belakang kartu -->
+                        <div class="chance-card-back" id="cardBack">
+                            <div class="chance-card-header" id="cardBackHeader">
+                                <div class="chance-card-icon-small" id="backCardIcon">?</div>
+                                <h2 id="backCardTitle">Judul Kartu</h2>
+                            </div>
+                            <div class="chance-card-content">
+                                <p class="chance-card-description" id="cardDescription">Deskripsi kartu akan muncul di sini.</p>
+                                <div class="chance-card-action" id="cardAction">
+                                    Aksi kartu akan muncul di sini.
+                                </div>
+                            </div>
+                            <div class="chance-card-footer">
+                                <button class="chance-card-button" id="cardButton">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-sidebar">
+                <div class="player-info">
+                    <h2>Skor Pemain</h2>
+                    <div id="playersList" class="players-list">
+                        <!-- Informasi pemain akan ditambahkan secara dinamis -->
+                    </div>
+                </div>
+                
+                <div class="game-actions">
+                    <div class="dice-container">
+                        <div class="dice" id="dice1">?</div>
+                    </div>
+                    <button id="rollDice" class="btn btn-action">Lempar Dadu</button>
+                </div>
+                
+
+                
+                <div class="card-decks-container">
+                    <h3>Kartu Permainan</h3>
+                    <div class="card-decks">
+                        <div class="card-deck" id="actionCardDeck">
+                            <div class="card-stack">
+                                <div class="card-in-stack"></div>
+                                <div class="card-in-stack"></div>
+                                <div class="card-in-stack"></div>
+                                <div class="card-in-stack"></div>
+                                <div class="card-top action-card">
+                                    <div class="card-title">CHANCE</div>
+                                    <div class="card-icon">?</div>
+                                    <div class="card-subtitle">SOCISAFE</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-deck" id="eventCardDeck">
+                            <div class="card-stack">
+                                <div class="card-in-stack"></div>
+                                <div class="card-in-stack"></div>
+                                <div class="card-in-stack"></div>
+                                <div class="card-in-stack"></div>
+                                <div class="card-top event-card">
+                                    <div class="card-title">EVENT</div>
+                                    <div class="card-icon">!</div>
+                                    <div class="card-subtitle">SOCISAFE</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Modal untuk aturan permainan -->
+        <div id="rulesModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Aturan Permainan</h2>
+                <div class="rules-content">
+                    <p>CyberSecurity Monopoly adalah permainan edukasi yang mengajarkan konsep keamanan siber dengan cara yang menyenangkan!</p>
+                    <ul>
+                        <li>Anda memulai dengan 2000 poin keamanan sebagai modal awal untuk membangun pertahanan siber Anda</li>
+                        <li>Papan permainan terdiri dari 40 kotak dengan berbagai tema keamanan siber yang harus Anda kuasai</li>
+                        <li>Lempar dadu untuk bergerak di papan permainan dan jelajahi dunia keamanan siber</li>
+                        <li>Anda dapat membeli aset keamanan pada kotak yang belum dimiliki untuk memperkuat pertahanan Anda</li>
+                        <li>Jika berhenti di kotak pajak atau denda, Anda harus membayar biaya keamanan sebagai konsekuensi</li>
+                        <li>Kartu kesempatan dapat memberikan bonus atau tantangan yang menguji pengetahuan siber Anda</li>
+                        <li>Tujuan permainan adalah mengumpulkan sebanyak mungkin aset keamanan siber dan menjadi pakar keamanan!</li>
+                    </ul>
+                    <div class="rules-footer">
+                        Selamat bermain dan jadilah ahli keamanan siber terbaik!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal untuk kartu -->
+        <div id="cardModal" class="modal">
+            <div class="modal-content card-modal">
+                <span class="close-modal">&times;</span>
+                <div class="card-header">
+                    <span id="cardIcon" class="card-icon-small"></span>
+                    <h2 id="cardTitle">Judul Kartu</h2>
+                </div>
+                <div class="card-content">
+                    <p id="cardDescription" class="card-description">Deskripsi kartu akan muncul di sini.</p>
+                    <div class="card-action-info">
+                        <strong>Aksi:</strong> <span id="cardAction"></span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button id="cardActionBtn" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="game-footer">
+        <div class="marquee-container">
+            <span class="marquee-text">
+                <span class="marquee-item">Education Games</span>
+                <span class="marquee-item">Awareness</span>
+                <span class="marquee-item">CyberSecurity</span>
+                <span class="marquee-item">Social Media</span>
+                <span class="marquee-item">Education Games</span>
+                <span class="marquee-item">Awareness</span>
+                <span class="marquee-item">CyberSecurity</span>
+                <span class="marquee-item">Social Media</span>
+                <span class="marquee-item">Education Games</span>
+                <span class="marquee-item">Awareness</span>
+                <span class="marquee-item">CyberSecurity</span>
+                <span class="marquee-item">Social Media</span>
+            </span>
+        </div>
+    </footer>
+
+    <script src="scripts/board.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+      // Ganti judul <h1> dengan nama karakter dari localStorage
+      document.addEventListener('DOMContentLoaded', function() {
+        const data = localStorage.getItem('characterData');
+        if (data) {
+          const nama = JSON.parse(data).nama || 'Pemain';
+          const h1 = document.querySelector('.game-header h1');
+          if (h1) h1.textContent = nama;
+        }
+      });
+    </script>
+</body>
+</html> 
