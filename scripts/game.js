@@ -6,9 +6,9 @@ class Player {
         this.id = id;
         this.name = name;
         this.color = color;
-        this.position = 0; // Posisi di papan (ID tile)
-        this.points = 500; // Poin keamanan awal
-        this.properties = []; // Properti yang dimiliki
+        this.position = 0;
+        this.points = 200;
+        this.properties = [];
         this.jailed = false; // Status di penjara
         this.jailTurns = 0; // Jumlah giliran di penjara
         this.jailFreeCards = 0; // Kartu bebas dari penjara

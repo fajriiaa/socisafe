@@ -2710,3 +2710,18 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.game-timer {
+    font-family: 'Orbitron', 'Courier New', Courier, monospace;
+    font-size: 1.3em;
+    color: #222;
+    background: #fff6;
+    border-radius: 8px;
+    padding: 4px 18px;
+    margin: 0 16px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    display: inline-block;
+    text-align: center;
+}
+

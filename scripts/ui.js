@@ -53,6 +53,11 @@ class UI {
         
         // Mulai permainan secara otomatis
         this.startGame();
+
+        this.timerInterval = null;
+        this.timerStart = null;
+        this.timerRunning = false;
+        this.missionComplete = false;
     }
 
     /**
@@ -61,6 +66,7 @@ class UI {
     initEventListeners() {
         // Tombol restart permainan
         this.restartGameBtn.addEventListener('click', () => {
+            this.resetTimer();
             this.startGame();
         });
         
@@ -85,6 +91,9 @@ class UI {
         
         // Tombol lempar dadu
         this.rollDiceBtn.addEventListener('click', () => {
+            if (!this.timerRunning && !this.missionComplete) {
+                this.startTimer();
+            }
             this.rollDice();
         });
         
@@ -1160,7 +1169,50 @@ class UI {
         this.cardDisplayContainer.classList.add('active');
     }
 
+    /**
+     * Mulai timer
+     */
+    startTimer() {
+        if (this.timerRunning) return;
+        this.timerStart = Date.now();
+        this.timerRunning = true;
+        this.missionComplete = false;
+        this.updateTimerDisplay(0);
+        this.timerInterval = setInterval(() => {
+            if (!this.timerRunning) return;
+            const elapsed = Math.floor((Date.now() - this.timerStart) / 1000);
+            this.updateTimerDisplay(elapsed);
+        }, 1000);
+    }
 
+    /**
+     * Berhentikan timer
+     */
+    stopTimer() {
+        this.timerRunning = false;
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        this.timerInterval = null;
+    }
+
+    /**
+     * Update tampilan jam
+     */
+    updateTimerDisplay(seconds) {
+        const timerEl = document.getElementById('gameTimer');
+        if (!timerEl) return;
+        const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+        const s = String(seconds % 60).padStart(2, '0');
+        timerEl.textContent = `${h}:${m}:${s}`;
+    }
+
+    /**
+     * Reset timer
+     */
+    resetTimer() {
+        this.stopTimer();
+        this.updateTimerDisplay(0);
+    }
 
     /**
      * Proses minigame setelah jeda
@@ -1267,6 +1319,12 @@ class UI {
         setTimeout(() => {
             this.rollDiceBtn.disabled = false;
         }, 500);
+
+        // Cek jika minigame mission complete
+        if (currentTile && currentTile.name && currentTile.name.toLowerCase().includes('mission complete')) {
+            this.missionComplete = true;
+            this.stopTimer();
+        }
     }
 
     /**
