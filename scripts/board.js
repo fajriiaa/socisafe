@@ -447,64 +447,56 @@ const CYBER_EVENT_CARDS = [
         title: 'Webinar Komunitas Sadar SMKI #4',
         description: 'Kamu ikut webinar tentang keamanan siber! Pengetahuan makin mantap.',
         action: 'collect',
-        value: 20,
-        icon: '🌐'
+        value: 50,
     },
     {
         id: 2,
         title: 'Report',
         description: 'Kamu membiarkan akun palsu menyebar tipu daya! Waspadalah... .',
         action: 'pay',
-        value: 15,
-        icon: '🌩️'
+        value: 50,
     },
     {
         id: 3,
         title: 'Giveaway Palsu',
         description: 'Kamu tergoda giveaway palsu dan kasih data pribadi! Kamu tertipu',
         action: 'pay',
-        value: 20,
-        icon: '🐛'
+        value: 50,
     },
     {
         id: 4,
         title: 'Tren Viral',
         description: 'Kamu isi challenge viral yang minta info pribadi! Bahaya tersembunyi…',
         action: 'pay',
-        value: 10,
-        icon: '📊'
+        value: 50,
     },
     {
         id: 5,
         title: 'Backup Data',
         description: 'Backup rutin? Good job! Datamu aman dari ancaman',
         action: 'collect',
-        value: 10,
-        icon: '🔄'
+        value: 50,
     },
     {
         id: 6,
         title: 'Volunter',
         description: 'Kamu aktif di komunitas kampanye edukasi siber! Aksimu berdampak besar',
         action: 'collect',
-        value: 30,
-        icon: '👨‍💼'
+        value: 50,
     },
     {
         id: 7,
         title: 'Insiden Keamanan',
         description: 'Lupa logout dari perangkat umum! Akunmu hampir diretas',
         action: 'pay',
-        value: 20,
-        icon: '🚨'
+        value: 50,
     },
     {
         id: 8,
         title: 'Penghargaan Keamanan',
         description: 'Anda menerima penghargaan atas kontribusi di bidang keamanan siber. Dapatkan bonus.',
         action: 'collect',
-        value: 10,
-        icon: '🏅'
+        value: 50,
     }
 ];
 

@@ -1258,7 +1258,7 @@ class UI {
                 this.game.playGameFromBox37();
                 break;
             case 38:
-                this.game.playGameFromBox5('6,5 % total penipuan pada 2024 menggunakan deepfake, termasuk suara/video palsu untuk menipu karyawan senior dan CEO.');
+                this.game.playGameFromBox5('6,5% total penipuan pada 2024 menggunakan deepfake, termasuk suara/video palsu untuk menipu karyawan senior dan CEO.');
                 break;
         }
         

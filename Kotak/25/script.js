@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var continueBtn = document.querySelector('.continue-btn');
     if (continueBtn) {
         continueBtn.addEventListener('click', function() {
-            window.parent.postMessage({ type: 'gameCompleted', points: 100 }, '*');
+            window.parent.postMessage({ type: 'gameCompleted', points: 25 }, '*');
         });
     }
 
