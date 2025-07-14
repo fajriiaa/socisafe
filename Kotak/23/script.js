@@ -1,14 +1,9 @@
 // Daftar kata malware (bisa ditambah nanti)
 const levels = [
   { word: 'VIRUS', explain: 'Program jahat yang dapat menggandakan diri dan merusak sistem.' },
-  { word: 'WORM', explain: 'Malware yang dapat menyebar sendiri tanpa bantuan pengguna.' },
   { word: 'TROJAN', explain: 'Malware yang menyamar sebagai program baik untuk mencuri data atau merusak.' },
   { word: 'SPYWARE', explain: 'Perangkat lunak yang diam-diam memantau dan mengirimkan data pengguna.' },
-  { word: 'PHISHING', explain: 'Upaya penipuan untuk mendapatkan data sensitif dengan menyamar sebagai pihak terpercaya.' },
-  { word: 'RANSOMWARE', explain: 'Malware yang mengenkripsi data dan meminta tebusan untuk mengembalikannya.' },
   { word: 'BOT', explain: 'Akun otomatis yang bisa digunakan untuk spam atau penipuan.' },
-  { word: 'ADWARE', explain: 'Perangkat lunak yang menampilkan iklan secara berlebihan di perangkat.' },
-  { word: 'SPAM', explain: 'Pesan sampah yang dikirim massal, sering berisi tautan berbahaya.' },
   { word: 'BACKDOOR', explain: 'Metode untuk melewati keamanan sistem dan mendapatkan akses tanpa izin.' },
 ];
 
@@ -123,7 +118,7 @@ function selectTile(idx) {
   if (selectedIndexes.length === level.word.length) {
     const userAnswer = selectedIndexes.map(i => shuffled[i]).join('');
     if (userAnswer === level.word) {
-      score += 10;
+      score += 20;
       updateScore();
       showCorrectMessage();
     } else {

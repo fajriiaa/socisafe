@@ -1,64 +1,34 @@
-// Data kata-kata UU ITE
+// Data kata-kata UU ITE dan UU PDP
 const wordData = [
     {
         word: "HOAKS",
         description: "Informasi yang tidak benar atau menyesatkan yang disebarluaskan melalui media elektronik.",
         article: "Pasal 28 ayat (1) UU ITE: Setiap Orang dengan sengaja dan tanpa hak menyebarkan berita bohong dan menyesatkan yang mengakibatkan kerugian konsumen dalam Transaksi Elektronik.",
-        points: 10
-    },
-    {
-        word: "PENCEMARAN",
-        description: "Perbuatan yang dilakukan dengan tujuan merusak nama baik seseorang melalui media elektronik.",
-        article: "Pasal 27 ayat (3) UU ITE: Setiap Orang dengan sengaja dan tanpa hak mendistribusikan dan/atau mentransmisikan dan/atau membuat dapat diaksesnya Informasi Elektronik dan/atau Dokumen Elektronik yang memiliki muatan penghinaan dan/atau pencemaran nama baik.",
-        points: 10
+        points: 20
     },
     {
         word: "FITNAH",
         description: "Perbuatan menyebarkan berita bohong yang dapat merugikan orang lain.",
         article: "Pasal 28 ayat (1) UU ITE: Setiap Orang dengan sengaja dan tanpa hak menyebarkan berita bohong dan menyesatkan yang mengakibatkan kerugian konsumen dalam Transaksi Elektronik.",
-        points: 10
+        points: 20
     },
     {
-        word: "ETIKA",
-        description: "Prinsip moral yang mengatur perilaku dalam penggunaan teknologi informasi.",
-        article: "Pasal 3 UU ITE: Pemanfaatan Teknologi Informasi dan Transaksi Elektronik dilaksanakan berdasarkan asas kepastian hukum, manfaat, kehati-hatian, iktikad baik, dan kebebasan memilih teknologi atau netral teknologi.",
-        points: 10
+        word: "PRIVASI",
+        description: "Hak untuk melindungi data pribadi dalam penggunaan teknologi informasi.",
+        article: "Pasal 4 UU PDP: Pemrosesan Data Pribadi dilakukan berdasarkan asas kepastian hukum, kemanfaatan, kehati-hatian, iktikad baik, dan kebebasan memilih teknologi atau netral teknologi.",
+        points: 20
+    },
+    {
+        word: "HACKING",
+        description: "Aktivitas mengakses sistem komputer secara tidak sah.",
+        article: "Pasal 66 UU PDP: Setiap Orang yang dengan sengaja dan tanpa hak memperoleh atau mengakses Data Pribadi yang bukan miliknya dipidana dengan pidana penjara paling lama 4 (empat) tahun dan/atau denda paling banyak Rp4.000.000.000,00 (empat miliar rupiah).",
+        points: 20
     },
     {
         word: "CYBERBULLYING",
         description: "Perbuatan mengganggu, mengusik, atau menyusahkan orang lain melalui media elektronik.",
         article: "Pasal 27 ayat (3) UU ITE: Setiap Orang dengan sengaja dan tanpa hak mendistribusikan dan/atau mentransmisikan dan/atau membuat dapat diaksesnya Informasi Elektronik dan/atau Dokumen Elektronik yang memiliki muatan penghinaan dan/atau pencemaran nama baik.",
-        points: 10
-    },
-    {
-        word: "PRIVASI",
-        description: "Hak untuk melindungi data pribadi dalam penggunaan teknologi informasi.",
-        article: "Pasal 26 UU ITE: Kecuali ditentukan lain oleh Peraturan Perundang-undangan, penggunaan setiap informasi melalui media elektronik yang menyangkut data pribadi seseorang harus dilakukan atas persetujuan Orang yang bersangkutan.",
-        points: 10
-    },
-    {
-        word: "HACKING",
-        description: "Aktivitas mengakses sistem komputer secara tidak sah.",
-        article: "Pasal 30 UU ITE: Setiap Orang dengan sengaja dan tanpa hak atau melawan hukum mengakses Komputer dan/atau Sistem Elektronik milik Orang lain dengan cara apa pun.",
-        points: 10
-    },
-    {
-        word: "PHISHING",
-        description: "Teknik penipuan untuk mencuri informasi pribadi dengan menyamar sebagai pihak yang terpercaya.",
-        article: "Pasal 28 ayat (1) UU ITE: Setiap Orang dengan sengaja dan tanpa hak menyebarkan berita bohong dan menyesatkan yang mengakibatkan kerugian konsumen dalam Transaksi Elektronik.",
-        points: 10
-    },
-    {
-        word: "VIRUS",
-        description: "Program berbahaya yang dapat merusak atau mengganggu sistem komputer.",
-        article: "Pasal 33 UU ITE: Setiap Orang dengan sengaja dan tanpa hak atau melawan hukum melakukan tindakan apa pun yang berakibat terganggunya Sistem Elektronik dan/atau mengakibatkan Sistem Elektronik menjadi tidak bekerja sebagaimana mestinya.",
-        points: 10
-    },
-    {
-        word: "SPAM",
-        description: "Pesan elektronik yang tidak diinginkan dan dikirim secara massal.",
-        article: "Pasal 27 ayat (1) UU ITE: Setiap Orang dengan sengaja dan tanpa hak mendistribusikan dan/atau mentransmisikan dan/atau membuat dapat diaksesnya Informasi Elektronik dan/atau Dokumen Elektronik yang memiliki muatan yang melanggar kesusilaan.",
-        points: 10
+        points: 20
     }
 ];
 
