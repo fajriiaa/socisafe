@@ -391,58 +391,50 @@ const CYBER_CHANCE_CARDS = [
     {
         id: 1,
         title: 'Koneksi Putus',
-        description: 'Lagi meeting penting, eh koneksi hilang. Kamu harus mengulang.',
-        icon: '🔍',
-        actionText: 'Kembali ke kotak awal!'
+        description: 'Lagi scroll, eh… kuota habis di tengah jalan.',
+        actionText: 'Kembali ke kotak sebelumnya'
     },
     {
         id: 2,
-        title: 'Password Bocor',
-        description: 'Password lama kamu ditemukan di data breach. Segera ganti password!',
-        icon: '🔑',
-        actionText: 'Menuju ke kotak Password Reset terdekat!'
+        title: 'Akses Premium Gratis!',
+        description: 'Kamu dapet akses gratis ke tools keamanan premium. Hidupmu lebih aman.',
+        actionText: 'Maju 2 langkah'
     },
     {
         id: 3,
-        title: 'Akun Ganda',
-        description: 'Kamu tidak sengaja membuat dua akun di platform yang sama.',
-        icon: '👥',
-        actionText: 'Kelola akunmu dengan baik, hindari duplikasi data pribadi.'
+        title: 'Kamu Viral...',
+        description: 'Postinganmu viral karena info salah. Sekarang kamu harus klarifikasi.',
+        actionText: 'Langsung ke kotak Cyber Investigation'
     },
     {
         id: 4,
         title: 'Login Asing',
         description: 'Ada percobaan login dari lokasi yang tidak dikenal.',
-        icon: '🌍',
-        actionText: 'Aktifkan verifikasi dua langkah untuk perlindungan ekstra.'
+        actionText: 'Menuju VerifiMe dan Aktifkan verifikasi dua langkah.'
     },
     {
         id: 5,
-        title: 'Update Aplikasi',
-        description: 'Aplikasi favoritmu meminta update keamanan terbaru.',
-        icon: '⬆️',
-        actionText: 'Selalu update aplikasi untuk menutup celah keamanan.'
+        title: 'Salah Kirim Password!',
+        description: 'Tanpa sadar kamu kirim password ke grup kelas. Waduh!',
+        actionText: 'Menuju Password Reset untuk ganti password'
     },
     {
         id: 6,
-        title: 'Email Palsu',
-        description: 'Kamu menerima email mencurigakan yang mengatasnamakan bank.',
-        icon: '✉️',
-        actionText: 'Jangan pernah klik link dari email yang tidak jelas sumbernya.'
+        title: 'Akunmu Masuk Trending!',
+        description: 'Kamu trending karena kampanye positif soal keamanan digital.',
+        actionText: 'Maju 4 langkah'
     },
     {
         id: 7,
-        title: 'Backup Data',
-        description: 'Kamu rutin melakukan backup data ke cloud.',
-        icon: '☁️',
-        actionText: 'Backup data secara rutin agar aman dari kehilangan.'
+        title: 'Update Sistem Berhasil!',
+        description: 'Sistem keamananmu diperbarui otomatis. Kamu selangkah lebih aman.',
+        actionText: 'Maju 3 langkah'
     },
     {
         id: 8,
-        title: 'Sosmed Terkunci',
-        description: 'Akun media sosialmu terkunci karena aktivitas mencurigakan.',
-        icon: '🔒',
-        actionText: 'Periksa keamanan akun dan aktifkan notifikasi login.'
+        title: 'Akun Dibajak Mantan Teman',
+        description: 'Mantan temanmu pakai akunmu buat nyebar spam. Kamu harus lapor!',
+        actionText: 'Mundur 2 langkah'
     }
 ];
 

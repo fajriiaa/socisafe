@@ -1954,7 +1954,8 @@ class Game {
         if (!player) return;
 
         const oldPosition = player.position;
-        const newPosition = (oldPosition + steps) % this.gameBoard.tiles.length;
+        let newPosition = (oldPosition + steps) % this.gameBoard.tiles.length;
+        if (newPosition < 0) newPosition += this.gameBoard.tiles.length;
         
         // Cek apakah melewati Start
         const passedStart = newPosition < oldPosition;

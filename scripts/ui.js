@@ -166,32 +166,107 @@ class UI {
                 const { card } = this.pendingCardEffect;
                 const player = this.game.getPlayer();
                 const startPosition = player.position;
-                
-                switch (card.action) {
-                    case 'collect':
-                        player.points += card.value;
-                        break;
-                    case 'pay':
-                        player.points = Math.max(0, player.points - card.value);
-                        break;
-                    case 'move':
-                        this.game.movePlayer(player.id, card.value);
-                        this.animatePlayerMovement(startPosition, player.position, () => {
-                            this.showTileInfo(player.position, { action: 'card-move' });
+                let moved = false;
+                // Deteksi actionText kartu chance
+                if (card.actionText) {
+                    if (card.id === 3 || (card.actionText && card.actionText.toLowerCase().includes('cyber investigation'))) {
+                        this.game.movePlayerToTile(player.id, 10);
+                        this.animateMoveBackward(startPosition, 10, () => {
+                            // Proses tile tujuan seperti mendarat normal (minigame, event, dll)
+                            const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(10), { passedStart: false }) || {};
+                            this.showTileInfo(10, infoResult);
+                        }, true);
+                        moved = true;
+                    } else if (card.id === 4 || (card.actionText && card.actionText.toLowerCase().includes('verifime'))) {
+                        this.game.movePlayerToTile(player.id, 4);
+                        this.animateMoveBackward(startPosition, 4, () => {
+                            // Proses tile tujuan seperti mendarat normal (minigame, event, dll)
+                            const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(4), { passedStart: false }) || {};
+                            this.showTileInfo(4, infoResult);
+                        }, true);
+                        moved = true;
+                    } else if (card.id === 5) {
+                        // Deteksi posisi pion sebelum efek kartu
+                        if (startPosition === 7) {
+                            this.game.movePlayerToTile(player.id, 15);
+                            this.animatePlayerMovement(startPosition, 15, () => {
+                                const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(15), { passedStart: false }) || {};
+                                this.showTileInfo(15, infoResult);
+                            }, true); // true = tanpa zoom
+                            moved = true;
+                        } else if (startPosition === 22) {
+                            this.game.movePlayerToTile(player.id, 25);
+                            this.animatePlayerMovement(startPosition, 25, () => {
+                                const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(25), { passedStart: false }) || {};
+                                this.showTileInfo(25, infoResult);
+                            }); // default: dengan zoom
+                            moved = true;
+                        } else if (startPosition === 36) {
+                            this.game.movePlayerToTile(player.id, 35);
+                            this.animateMoveBackward(startPosition, 35, () => {
+                                const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(35), { passedStart: false }) || {};
+                                this.showTileInfo(35, infoResult);
+                            }); // default: mundur dengan zoom
+                            moved = true;
+                        }
+                    } else if (card.actionText.includes('Kembali ke kotak sebelumnya')) {
+                        this.game.movePlayer(player.id, -1);
+                        this.animateMoveBackward(startPosition, player.position, () => {
+                            // Proses tile tujuan seperti mendarat normal
+                            const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(player.position), { passedStart: false }) || {};
+                            this.showTileInfo(player.position, infoResult);
                         });
-                        break;
-                    case 'goto-jail':
-                        this.game.sendPlayerToJail(player.id);
+                        moved = true;
+                    } else if (/Maju (\d+) langkah/.test(card.actionText)) {
+                        const match = card.actionText.match(/Maju (\d+) langkah/);
+                        const langkah = parseInt(match[1], 10);
+                        this.game.movePlayer(player.id, langkah);
                         this.animatePlayerMovement(startPosition, player.position, () => {
-                            this.showTileInfo(player.position, { action: 'card-jail' });
+                            // Proses tile tujuan seperti mendarat normal
+                            const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(player.position), { passedStart: false }) || {};
+                            this.showTileInfo(player.position, infoResult);
                         });
-                        break;
-                    case 'goto':
-                        this.game.movePlayerToStart(player.id);
-                        this.animatePlayerMovement(startPosition, player.position, () => {
-                            this.showTileInfo(player.position, { action: 'card-start' });
+                        moved = true;
+                    } else if (/Mundur (\d+) langkah/.test(card.actionText)) {
+                        const match = card.actionText.match(/Mundur (\d+) langkah/);
+                        const langkah = parseInt(match[1], 10);
+                        this.game.movePlayer(player.id, -langkah);
+                        this.animateMoveBackward(startPosition, player.position, () => {
+                            // Proses tile tujuan seperti mendarat normal
+                            const infoResult = this.game.processTileAction(player, this.game.gameBoard.getTileById(player.position), { passedStart: false }) || {};
+                            this.showTileInfo(player.position, infoResult);
                         });
-                        break;
+                        moved = true;
+                    }
+                }
+                if (!moved) {
+                    // Jalankan efek kartu lain seperti biasa
+                    switch (card.action) {
+                        case 'collect':
+                            player.points += card.value;
+                            break;
+                        case 'pay':
+                            player.points = Math.max(0, player.points - card.value);
+                            break;
+                        case 'move':
+                            this.game.movePlayer(player.id, card.value);
+                            this.animatePlayerMovement(startPosition, player.position, () => {
+                                this.showTileInfo(player.position, { action: 'card-move' });
+                            });
+                            break;
+                        case 'goto-jail':
+                            this.game.sendPlayerToJail(player.id);
+                            this.animatePlayerMovement(startPosition, player.position, () => {
+                                this.showTileInfo(player.position, { action: 'card-jail' });
+                            });
+                            break;
+                        case 'goto':
+                            this.game.movePlayerToStart(player.id);
+                            this.animatePlayerMovement(startPosition, player.position, () => {
+                                this.showTileInfo(player.position, { action: 'card-start' });
+                            });
+                            break;
+                    }
                 }
                 this.updatePlayerUI();
                 this.pendingCardEffect = null;
@@ -449,31 +524,22 @@ class UI {
     /**
      * Animasi pergerakan token pemain
      */
-    animatePlayerMovement(fromPosition, toPosition, callback) {
+    animatePlayerMovement(fromPosition, toPosition, callback, noZoom = false) {
         const player = this.game.getPlayer();
         const steps = this.calculateSteps(fromPosition, toPosition);
         let currentStep = 0;
         const moveInterval = 500; // Interval waktu untuk setiap langkah (lebih lambat untuk melihat dengan jelas)
-        
-        // Zoom ke pion terlebih dahulu
-        this.zoomToPlayer(() => {
-            // Hapus pemanggilan showMovingNotification
-            // Tambahkan jeda 1 detik sebelum mulai bergerak agar pemain bisa melihat posisi awal
+
+        const doMove = () => {
             setTimeout(() => {
-                // Setelah zoom selesai, mulai animasi pergerakan
                 const moveStep = () => {
                     if (currentStep >= steps) {
-                        // Hapus highlight setelah selesai bergerak
                         this.clearTileHighlights();
-                        
-                        // Hapus pemanggilan hideMovingNotification
-                        // Setelah selesai bergerak, zoom out dan panggil callback
                         this.zoomOut(() => {
                             if (callback) callback();
                         });
                         return;
                     }
-                    
                     currentStep++;
                     // Hitung posisi baru
                     let newPosition;
@@ -483,24 +549,23 @@ class UI {
                         // Untuk pergerakan mundur atau melewati start
                         newPosition = (fromPosition + currentStep) % 40;
                     }
-                    
                     // Update posisi pemain sementara untuk animasi
                     player.position = newPosition;
-                    
                     // Render ulang token
                     this.renderPlayerToken();
-                    
                     // Highlight kotak yang sedang didatangi
                     this.highlightCurrentTile(newPosition);
-                    
                     // Lanjutkan ke langkah berikutnya
                     setTimeout(moveStep, moveInterval);
                 };
-                
-                // Mulai animasi pergerakan
                 moveStep();
-            }, 1000);
-        });
+            }, noZoom ? 0 : 1000);
+        };
+        if (noZoom) {
+            doMove();
+        } else {
+            this.zoomToPlayer(doMove);
+        }
     }
 
     /**
@@ -1055,10 +1120,6 @@ class UI {
         // Set kelas kartu berdasarkan tipe
         this.displayedCard.className = `chance-card ${cardType}-card`;
         this.frontCardTitle.textContent = cardType === 'action' ? 'KARTU CHANCE' : 'KARTU EVENT';
-        this.frontCardIcon.textContent = cardType === 'action' ? '?' : '!';
-        // Set konten kartu bagian belakang
-        this.backCardTitle.textContent = card.title;
-        this.backCardIcon.textContent = card.icon || '?';
         this.cardDescription.textContent = card.description;
         // Set aksi kartu
         let actionText = '';
@@ -1338,7 +1399,7 @@ class UI {
     /**
      * Animasi pergerakan mundur dari kotak 9 ke kotak 6
      */
-    animateMoveBackward(fromTile, toTile, callback) {
+    animateMoveBackward(fromTile, toTile, callback, noZoom = false) {
         const player = this.game.getPlayer();
         // Hitung langkah mundur yang diperlukan
         let steps = 0;
@@ -1350,8 +1411,7 @@ class UI {
         let currentStep = 0;
         const moveInterval = 500; // Interval waktu untuk setiap langkah
 
-        // Zoom ke pion terlebih dahulu (sama seperti animatePlayerMovement)
-        this.zoomToPlayer(() => {
+        const doMove = () => {
             setTimeout(() => {
                 const moveStep = () => {
                     if (currentStep >= steps) {
@@ -1370,8 +1430,14 @@ class UI {
                     setTimeout(moveStep, moveInterval);
                 };
                 moveStep();
-            }, 1000);
-        });
+            }, noZoom ? 0 : 1000);
+        };
+
+        if (noZoom) {
+            doMove();
+        } else {
+            this.zoomToPlayer(doMove);
+        }
     }
 }
 
