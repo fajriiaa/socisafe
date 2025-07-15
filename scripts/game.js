@@ -1734,6 +1734,12 @@ class Game {
                 justify-content: center;
                 padding: 0;
                 margin: 0;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .device-overlay.closing {
+                opacity: 0;
+                background: rgba(30,41,59,0);
+                backdrop-filter: blur(0px);
             }
             .device-iframe {
                 border: none;
@@ -1744,7 +1750,12 @@ class Game {
                 padding: 0;
                 display: block;
                 overflow: hidden;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
                 animation: devicePopIn 0.6s cubic-bezier(0.4,0,0.2,1);
+            }
+            .device-overlay.closing .device-iframe {
+                transform: scale(0.8);
+                opacity: 0;
             }
             @keyframes devicePopIn {
                 0% {
@@ -1763,26 +1774,33 @@ class Game {
         `;
         document.head.appendChild(style);
         document.body.appendChild(overlay);
+        
+        // Fungsi untuk menutup overlay dengan animasi smooth
+        const closeOverlayWithAnimation = () => {
+            overlay.classList.add('closing');
+            setTimeout(() => {
+                const overlayEl = document.querySelector('.device-overlay');
+                const styleEl = [...document.head.querySelectorAll('style')].find(s => s.textContent.includes('.device-overlay'));
+                if (overlayEl) overlayEl.remove();
+                if (styleEl) styleEl.remove();
+                document.body.style.overflow = '';
+            }, 600);
+        };
+        
         // Event listener untuk pesan dari iframe (game selesai)
         const messageHandler = (event) => {
             if (event.data.type === 'gameCompleted') {
-                const points = event.data.points !== undefined ? event.data.points : 20;
+                const points = event.data.points !== undefined ? event.data.points : 100;
                 this.player.addPoints(points);
                 showMissionSuccess({
                     title: "Congratulations!",
-                    desc: "Kamu berhasil menyelesaikan mini game quiz keamanan!",
+                    desc: "Kamu berhasil melindungi akunmu dari serangan malware!",
                     points: points
                 });
                 this.updatePlayerPoints();
-                // Tutup overlay LANGSUNG tanpa delay
-                const overlay = document.querySelector('.device-overlay');
-                const style = [...document.head.querySelectorAll('style')].find(s => s.textContent.includes('.device-overlay'));
-                if (overlay) overlay.remove();
-                if (style) style.remove();
-                // Hapus event listener
                 window.removeEventListener('message', messageHandler);
-                // Kembalikan scrolling
-                document.body.style.overflow = '';
+                // Tutup overlay dengan animasi smooth
+                closeOverlayWithAnimation();
             }
         };
         window.addEventListener('message', messageHandler);
@@ -3772,7 +3790,7 @@ class Game {
         const messageHandler = (event) => {
             if (event.data.type === 'gameCompleted') {
                 // Kurangi poin 200
-                this.player.deductPoints(200);
+                this.player.deductPoints(100);
                 this.updatePlayerPoints();
                 window.removeEventListener('message', messageHandler);
                 // Tutup overlay dulu, baru tampilkan popup perhatian
@@ -3780,24 +3798,24 @@ class Game {
                 setTimeout(() => {
                     showMissionSuccess({
                         title: "Perhatian!",
-                        desc: "Anda harus mundur ke Kotak 31 untuk memahami bahaya pelanggaran UU ITE. Poin Anda berkurang 200!",
-                        points: -200,
+                        desc: "Kamu mencemarkan nama baik orang lain. Itu melanggar UU ITE, ayo pahami risikonya di Kotak 34.",
+                        points: -100,
                         onClose: () => {
                             // Setelah popup ditutup, pion bergerak mundur ke kotak 31, lalu tampilkan minigame kotak 31
                             if (this.ui) {
-                                this.ui.animateMoveBackward(37, 31, () => {
-                                    this.ui.showTileInfo(31, {
+                                this.ui.animateMoveBackward(37, 34, () => {
+                                    this.ui.showTileInfo(34, {
                                         action: 'play-game',
                                         afterTileInfo: () => {
                                             this.ui.showMinigameNotification(() => {
-                                                this.playGameFromBox31();
+                                                this.playGameFromBox34();
                                             });
                                         }
                                     });
                                 });
                             } else {
-                                this.movePlayerToTile(this.player.id, 31);
-                                this.playGameFromBox31();
+                                this.movePlayerToTile(this.player.id, 34);
+                                this.playGameFromBox34();
                             }
                         }
                     });

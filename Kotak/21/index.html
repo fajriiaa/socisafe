@@ -515,35 +515,43 @@
             transition: width 0.3s cubic-bezier(.4,2,.6,1);
         }
 
+        /* Game Over dan Success Overlay - sekarang di dalam device screen dengan tampilan yang lebih keren, modern dan menarik */
         .game-over-overlay {
             position: absolute;
             left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(20,30,40,0.7);
-            z-index: 9999;
+            z-index: 5000;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 22px;
+            overflow: hidden;
         }
         .game-over-text {
             color: #fff;
             font-family: 'Poppins', Arial, sans-serif;
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            text-shadow: 0 2px 12px #000, 0 0 32px #00c3ff;
+            text-shadow: 0 4px 20px #000, 0 0 30px #ff4757;
             letter-spacing: 2px;
-            padding: 32px 48px;
-            border-radius: 18px;
-            background: rgba(0,0,0,0.25);
+            padding: 24px 36px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(255,71,87,0.1), rgba(255,71,87,0.05));
+            border: 2px solid rgba(255,71,87,0.3);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(255,71,87,0.2);
         }
 
         .edukasi-modal {
-            position: fixed;
-            left: 0; top: 0; width: 100vw; height: 100vh;
+            position: absolute;
+            left: 0; top: 0; width: 100%; height: 100%;
             background: rgba(30,40,50,0.55);
-            z-index: 1000;
+            z-index: 4000;
             display: none;
             align-items: center;
             justify-content: center;
+            border-radius: 22px;
+            overflow: hidden;
         }
         .edukasi-box {
             background: #232e3a;
@@ -561,6 +569,15 @@
         @keyframes edukasiPop {
             0% { transform: scale(0.7); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes resultPop {
+            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        
+        .game-over-box, .success-box {
+            animation: resultPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
         .edukasi-title {
             font-size: 1.05rem;
@@ -624,39 +641,69 @@
         }
 
         .success-overlay {
-            position: fixed;
+            position: absolute;
             left: 0;
             top: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background: rgba(30,40,50,0.92);
-            z-index: 999;
+            z-index: 5000;
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            border-radius: 22px;
+            overflow: hidden;
         }
+        /* Success overlay juga di dalam device screen */
+        /* Success text dengan ukuran yang lebih kecil dan simpel */
         .success-text {
             color: #00e676;
             font-family: 'Poppins', Arial, sans-serif;
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            text-shadow: 0 2px 12px #000, 0 0 32px #00c3ff;
+            text-shadow: 0 4px 20px #000, 0 0 30px #00e676;
             letter-spacing: 2px;
-            padding: 32px 48px;
-            border-radius: 18px;
-            background: rgba(0,0,0,0.25);
+            padding: 24px 36px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(0,230,118,0.1), rgba(0,230,118,0.05));
+            border: 2px solid rgba(0,230,118,0.3);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0,230,118,0.2);
         }
+        /* Continue button dengan style yang lebih kecil dan disabled */
         .continue-btn {
-            margin-top: 20px;
-            padding: 10px 24px;
-            font-size: 18px;
+            margin-top: 16px;
+            padding: 12px 24px;
+            font-size: 16px;
             border: none;
             border-radius: 8px;
-            background: #00e676;
-            color: #222;
-            cursor: pointer;
+            background: linear-gradient(135deg, #666, #555);
+            color: #999;
+            cursor: default;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
         }
+        
+        .try-again-btn {
+            transition: all 0.3s ease;
+        }
+        
+                 .try-again-btn:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(255,71,87,0.4);
+         }
+         
+         .continue-btn:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(0,230,118,0.4);
+         }
+         
+         .continue-btn:active {
+             transform: translateY(0);
+             box-shadow: 0 2px 8px rgba(0,230,118,0.3);
+         }
         .start-screen {
             position: absolute;
             left: 0; top: 0; width: 100%; height: 100%;
@@ -742,28 +789,32 @@
 </head>
 <body>
     <div class="game-container">
-        <div class="edukasi-modal" style="display:none;">
-            <div class="edukasi-box">
-                <div class="edukasi-title">Edukasi Malware</div>
-                <div class="edukasi-content"></div>
-                <button class="edukasi-close">Tutup</button>
-            </div>
-        </div>
-        <div class="game-over-overlay" style="display:none; flex-direction:column; align-items:center; justify-content:center;">
-            <div class="game-over-box" style="background:rgba(30,40,50,0.95); border-radius:18px; box-shadow:0 4px 32px #0008; padding:40px 48px 32px 48px; display:flex; flex-direction:column; align-items:center; min-width:340px;">
-                <div class="game-over-text" style="font-family:'Poppins',Arial,sans-serif; font-size:3rem; font-weight:700; color:#fff; text-shadow:0 2px 32px #00c3ff,0 0 32px #00c3ff; letter-spacing:2px; margin-bottom:18px;">GAME OVER</div>
-                <button class="try-again-btn" style="margin-top:0; display:flex; align-items:center; gap:8px; padding:10px 18px; font-size:18px; border:none; border-radius:8px; background:#222; color:#fff; cursor:pointer;"> <span style="font-size:22px;">&#8635;</span> Main Lagi </button>
-            </div>
-        </div>
-        <div class="success-overlay" style="display:none; flex-direction:column; align-items:center; justify-content:center; position:fixed; left:0; top:0; width:100vw; height:100vh; background:rgba(30,40,50,0.92); z-index:999;">
-            <div class="success-box" style="background:rgba(30,40,50,0.95); border-radius:18px; box-shadow:0 4px 32px #0008; padding:40px 48px 32px 48px; display:flex; flex-direction:column; align-items:center; min-width:340px;">
-                <div class="game-over-text" style="font-family:'Poppins',Arial,sans-serif; font-size:3rem; font-weight:700; color:#00e676; text-shadow:0 2px 32px #00c3ff,0 0 32px #00c3ff; letter-spacing:2px; margin-bottom:18px;">SUCCESSFUL</div>
-                <button class="continue-btn" style="margin-top:0; padding:10px 24px; font-size:18px; border:none; border-radius:8px; background:#00e676; color:#222; cursor:pointer;">Continue</button>
-            </div>
-        </div>
         <div class="device-frame">
             <div class="tablet-btn"></div>
             <div class="device-screen">
+                <!-- Game Over dan Success Overlay - sekarang di dalam device screen -->
+                <div class="game-over-overlay" style="display:none; flex-direction:column; align-items:center; justify-content:center;">
+                    <div class="game-over-box" style="background:rgba(20,25,35,0.98); border-radius:20px; box-shadow:0 8px 40px rgba(255,71,87,0.3), 0 0 0 1px rgba(255,71,87,0.1); padding:36px 44px 28px 44px; display:flex; flex-direction:column; align-items:center; min-width:320px;">
+                        <div class="game-over-text" style="font-family:'Poppins',Arial,sans-serif; font-size:2.2rem; font-weight:700; color:#fff; text-shadow:0 4px 20px #000,0 0 30px #ff4757; letter-spacing:2px; margin-bottom:16px;">GAME OVER</div>
+                        <div style="font-family:'Poppins',Arial,sans-serif; font-size:1rem; color:#e0e0e0; text-align:center; margin-bottom:20px; line-height:1.5; max-width:280px;">Jangan menyerah! Coba lagi dan lindungi akunmu dengan lebih baik!</div>
+                        <button class="try-again-btn" style="margin-top:0; display:flex; align-items:center; gap:8px; padding:12px 20px; font-size:16px; border:none; border-radius:8px; background:linear-gradient(135deg,#ff4757,#ff3838); color:#fff; cursor:pointer; box-shadow:0 4px 16px rgba(255,71,87,0.3); font-weight:600;"> <span style="font-size:18px;">&#8635;</span> Main Lagi </button>
+                    </div>
+                </div>
+                <div class="success-overlay" style="display:none;">
+                    <div class="success-box" style="background:rgba(20,25,35,0.98); border-radius:20px; box-shadow:0 8px 40px rgba(0,230,118,0.3), 0 0 0 1px rgba(0,230,118,0.1); padding:36px 44px 28px 44px; display:flex; flex-direction:column; align-items:center; min-width:320px;">
+                        <div class="game-over-text" style="font-family:'Poppins',Arial,sans-serif; font-size:2.2rem; font-weight:700; color:#00e676; text-shadow:0 4px 20px #000,0 0 30px #00e676; letter-spacing:2px; margin-bottom:16px;">SUCCESSFUL</div>
+                                                 <div style="font-family:'Poppins',Arial,sans-serif; font-size:1rem; color:#e0e0e0; text-align:center; margin-bottom:20px; line-height:1.5; max-width:280px;">Selamat! Kamu berhasil melindungi akunmu dari serangan malware! Klik 'Selesai' untuk kembali ke menu utama.</div>
+                                                 <!-- Continue button - aktif untuk menutup game -->
+                         <button class="continue-btn" style="margin-top:0; padding:12px 24px; font-size:16px; border:none; border-radius:8px; background:linear-gradient(135deg,#00e676,#00c853); color:#fff; cursor:pointer; box-shadow:0 4px 16px rgba(0,230,118,0.3); font-weight:600; transition:all 0.3s ease;">Selesai</button>
+                    </div>
+                </div>
+                <div class="edukasi-modal" style="display:none;">
+                    <div class="edukasi-box">
+                        <div class="edukasi-title">Edukasi Malware</div>
+                        <div class="edukasi-content"></div>
+                        <button class="edukasi-close">Tutup</button>
+                    </div>
+                </div>
                 <div class="screen-content" style="position:relative; width:100%; height:100%;">
                     <div class="start-screen" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:340px; min-width:0; height:auto; background:#232e3a; z-index:2000; display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:20px; box-shadow:0 2px 24px #00c3ff22; padding:24px 0 18px 0;">
                         <img src="threatshooter.png" alt="Threat Shooter Logo" style="width:78px; height:78px; margin-bottom:14px; box-shadow:0 2px 12px #00c3ff33; border-radius:16px; border:4px solid #00c3ff; background:#232e3a;">
@@ -771,7 +822,7 @@
                         <div style="font-family:'Poppins',Arial,sans-serif; font-size:0.98rem; color:#fff; text-align:center; margin-bottom:22px; max-width:260px; text-shadow:0 2px 8px #00c3ff22;">Lindungi akunmu dari serangan malware! Tembak virus yang turun, hindari bahaya, dan pelajari tips menjaga privasi di dunia digital.</div>
                         <button class="start-btn" style="padding:9px 28px; font-size:1rem; font-weight:700; color:#fff; background:linear-gradient(90deg,#00c3ff,#3be6c6); border:none; border-radius:10px; box-shadow:0 2px 8px #00c3ff55; cursor:pointer;">Mulai</button>
                     </div>
-                    <div class="timer-box"><span class="timer-text">02:00</span></div>
+                    <div class="timer-box"><span class="timer-text">01:00</span></div>
                     <div class="container"></div>
                     <div class="intro-overlay" style="display:none; position:absolute; left:3%; top:6%; width:94%; height:88%; background:rgba(30,40,50,0.93); z-index:3000; align-items:center; justify-content:center; box-sizing:border-box; border-radius:22px; padding:36px 0;">
                       <div class="intro-content" style="display:flex; flex-direction:row; align-items:center; justify-content:center; width:100%; max-width:370px; margin:auto; gap:36px; height:auto; background:transparent; border-radius:18px; box-sizing:border-box; padding:0 18px;">
@@ -1445,8 +1496,8 @@
                 this.malwareTypes = ['virus', 'antivirus'];
                 this.malware = [];
                 this.spawnTimer = 0;
-                this.baseSpawnInterval = 3000; // ms, awal (lebih lambat)
-                this.minSpawnInterval = 600; // ms, akhir
+                this.baseSpawnInterval = 4000; // ms, awal (lebih lambat) - diperlambat
+                this.minSpawnInterval = 1200; // ms, akhir - diperlambat
                 this.spawnInterval = this.baseSpawnInterval;
                 this.startSpawning();
             }
@@ -1458,7 +1509,7 @@
 
             // Update malware handler
             update() {
-                // Update spawnInterval berdasarkan timeLeft
+                // Update spawnInterval berdasarkan timeLeft - disesuaikan untuk 60 detik
                 if (typeof timeLeft !== 'undefined') {
                     // Linear: makin sedikit waktu, makin cepat
                     const t = Math.max(0, Math.min(120, timeLeft));
@@ -1517,9 +1568,9 @@
                 this.targetX = options.targetX;
                 this.targetY = options.targetY;
                 this.type = options.type;
-                // Movement
-                this.baseSpeed = getRandom(0.7, 1.2); // Awal lebih pelan
-                this.maxSpeed = getRandom(3, 4.2); // Akhir cepat
+                // Movement - Kecepatan diperlambat untuk gameplay yang lebih mudah
+                this.baseSpeed = getRandom(0.3, 0.6); // Awal lebih pelan
+                this.maxSpeed = getRandom(1.5, 2.5); // Akhir lebih pelan
                 this.speed = this.baseSpeed;
                 this.angle = Math.atan2(this.targetY - this.y, this.targetX - this.x);
                 this.xvel = Math.cos(this.angle) * this.speed;
@@ -1583,11 +1634,11 @@
                 );
                 if (overlap && playerHealth > 0 && !this.hasHitPlayer) {
                     if (this.type === 'virus') {
-                        playerHealth -= 10;
+                        playerHealth -= 5; // Kerusakan dikurangi dari 10 ke 5
                         if (playerHealth < 0) playerHealth = 0;
                         updateHealthBar();
                     } else if (this.type === 'antivirus') {
-                        playerHealth += 10;
+                        playerHealth += 15; // Healing ditingkatkan dari 10 ke 15
                         if (playerHealth > 100) playerHealth = 100;
                         updateHealthBar();
                     }
@@ -1603,7 +1654,7 @@
                 return true;
             }
 
-            // Update kecepatan berdasarkan waktu
+            // Update kecepatan berdasarkan waktu - disesuaikan untuk 60 detik
             updateSpeedByTime(timeLeft) {
                 // Linear: makin sedikit waktu, makin cepat
                 const t = Math.max(0, Math.min(120, timeLeft));
@@ -1853,7 +1904,7 @@
             pauseGame = false;
         };
 
-        // Timer logic
+        // Timer logic - Waktu diubah dari 60 detik menjadi 10 detik
         let timeLeft = 60;
         let timerInterval = setInterval(function() {
             if (pauseGame || gameOver) return;
@@ -1878,7 +1929,7 @@
         }
         updateTimerBox();
 
-        // Event tombol Try Again dan Continue
+        // Event tombol Try Again dan Continue - Continue button tidak melakukan apa-apa
         document.querySelector('.try-again-btn').onclick = function() {
             // Set flag agar reload langsung ke gameplay
             localStorage.setItem('skipIntro', '1');
