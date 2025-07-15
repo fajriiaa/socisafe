@@ -115,47 +115,69 @@
                 </div>
             </div>
         </main>
-        
-        <!-- Modal untuk aturan permainan -->
-        <div id="rulesModal" class="modal">
-            <div class="modal-content">
-                <span class="close-modal">&times;</span>
+    </div>
+
+    <!-- Modal untuk aturan permainan -->
+    <div id="rulesModal" class="modal">
+        <div class="modal-content rules-modal">
+            <span class="close-modal">&times;</span>
+            <div class="rules-header">
                 <h2>Aturan Permainan</h2>
-                <div class="rules-content">
-                    <p>CyberSecurity Monopoly adalah permainan edukasi yang mengajarkan konsep keamanan siber dengan cara yang menyenangkan!</p>
-                    <ul>
-                        <li>Anda memulai dengan 2000 poin keamanan sebagai modal awal untuk membangun pertahanan siber Anda</li>
-                        <li>Papan permainan terdiri dari 40 kotak dengan berbagai tema keamanan siber yang harus Anda kuasai</li>
-                        <li>Lempar dadu untuk bergerak di papan permainan dan jelajahi dunia keamanan siber</li>
-                        <li>Anda dapat membeli aset keamanan pada kotak yang belum dimiliki untuk memperkuat pertahanan Anda</li>
-                        <li>Jika berhenti di kotak pajak atau denda, Anda harus membayar biaya keamanan sebagai konsekuensi</li>
-                        <li>Kartu kesempatan dapat memberikan bonus atau tantangan yang menguji pengetahuan siber Anda</li>
-                        <li>Tujuan permainan adalah mengumpulkan sebanyak mungkin aset keamanan siber dan menjadi pakar keamanan!</li>
+                <p class="rules-subtitle">CyberSecurity Monopoly - Edukasi Keamanan Siber</p>
+            </div>
+            <div class="rules-content">
+                <div class="rules-section">
+                    <h3>Tujuan Permainan</h3>
+                    <p>Menjadi pakar keamanan siber dengan mengumpulkan aset keamanan dan menguasai dunia cyber security!</p>
+                </div>
+                
+                <div class="rules-section">
+                    <h3>Modal Awal</h3>
+                    <p>Setiap pemain memulai dengan 2000 poin keamanan sebagai modal untuk membangun pertahanan siber.</p>
+                </div>
+                
+                <div class="rules-section">
+                    <h3>Cara Bermain</h3>
+                    <ul class="rules-list">
+                        <li>Lempar dadu untuk bergerak di papan permainan</li>
+                        <li>Jelajahi 40 kotak dengan tema keamanan siber</li>
+                        <li>Beli aset keamanan pada kotak yang belum dimiliki</li>
+                        <li>Bayar biaya keamanan saat berhenti di kotak pajak/denda</li>
                     </ul>
-                    <div class="rules-footer">
-                        Selamat bermain dan jadilah ahli keamanan siber terbaik!
-                    </div>
+                </div>
+                
+                <div class="rules-section">
+                    <h3>Kartu Khusus</h3>
+                    <p>Kartu kesempatan dan event dapat memberikan bonus atau tantangan yang menguji pengetahuan siber Anda.</p>
+                </div>
+                
+                <div class="rules-section">
+                    <h3>Kemenangan</h3>
+                    <p>Pemain dengan aset keamanan siber terbanyak dan pengetahuan cyber security terbaik akan menjadi pemenang!</p>
                 </div>
             </div>
+            <div class="rules-footer">
+                <p>Selamat bermain dan jadilah ahli keamanan siber terbaik!</p>
+            </div>
         </div>
+    </div>
 
-        <!-- Modal untuk kartu -->
-        <div id="cardModal" class="modal">
-            <div class="modal-content card-modal">
-                <span class="close-modal">&times;</span>
-                <div class="card-header">
-                    <span id="cardIcon" class="card-icon-small"></span>
-                    <h2 id="cardTitle">Judul Kartu</h2>
+    <!-- Modal untuk kartu -->
+    <div id="cardModal" class="modal">
+        <div class="modal-content card-modal">
+            <span class="close-modal">&times;</span>
+            <div class="card-header">
+                <span id="cardIcon" class="card-icon-small"></span>
+                <h2 id="cardTitle">Judul Kartu</h2>
+            </div>
+            <div class="card-content">
+                <p id="cardDescription" class="card-description">Deskripsi kartu akan muncul di sini.</p>
+                <div class="card-action-info">
+                    <strong>Aksi:</strong> <span id="cardAction"></span>
                 </div>
-                <div class="card-content">
-                    <p id="cardDescription" class="card-description">Deskripsi kartu akan muncul di sini.</p>
-                    <div class="card-action-info">
-                        <strong>Aksi:</strong> <span id="cardAction"></span>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button id="cardActionBtn" class="btn btn-primary">OK</button>
-                </div>
+            </div>
+            <div class="card-footer">
+                <button id="cardActionBtn" class="btn btn-primary">OK</button>
             </div>
         </div>
     </div>

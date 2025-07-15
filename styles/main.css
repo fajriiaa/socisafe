@@ -736,12 +736,13 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
     justify-content: center;
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 .modal.active {
@@ -749,39 +750,63 @@ body::after {
     opacity: 1;
 }
 
+/* Mencegah scroll pada body saat modal aktif */
+body.modal-open {
+    overflow: hidden;
+}
+
 .modal-content {
     background-color: white;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    padding: 20px;
+    padding: 15px;
     width: 90%;
     max-width: 500px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    transform: translateY(20px);
+    transform: translateY(20px) scale(0.95);
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: all 0.3s ease;
+    margin: auto;
 }
 
 .modal.active .modal-content {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
     animation: fadeInScale 0.4s ease forwards;
 }
 
 .close-modal {
     position: absolute;
-    top: 10px;
+    top: 12px;
     right: 15px;
-    font-size: 24px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
-    color: var(--dark-color);
-    transition: color 0.3s ease;
+    color: #e2e8f0;
+    background: rgba(239, 68, 68, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
 }
 
 .close-modal:hover {
-    color: var(--accent-color);
+    background: rgba(239, 68, 68, 1);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.close-modal:active {
+    transform: scale(0.95);
 }
 
 .modal h2 {
@@ -805,144 +830,159 @@ body::after {
     border-radius: 3px;
 }
 
-/* Styling untuk aturan permainan */
-.rules-content {
-    line-height: 1.6;
-    font-size: 16px;
+/* Styling untuk modal aturan permainan yang baru */
+.rules-modal {
+    max-width: 450px;
+    width: 90%;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin: 0;
 }
 
-.rules-content p {
-    margin-bottom: 20px;
+.modal.active .rules-modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.rules-header {
     text-align: center;
-    font-weight: 500;
-    color: var(--primary-color);
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.3);
 }
 
-.rules-content ul {
+.rules-header h2 {
+    color: #e2e8f0;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.rules-subtitle {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.rules-content {
+    line-height: 1.5;
+    font-size: 14px;
+    color: #e2e8f0;
+}
+
+.rules-section {
+    margin-bottom: 18px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.rules-section:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.rules-section h3 {
+    color: #60a5fa;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rules-section p {
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+.rules-list {
     margin: 0;
     padding: 0;
-    list-style-type: none;
+    list-style: none;
 }
 
-.rules-content li {
+.rules-list li {
     position: relative;
-    margin-bottom: 15px;
-    padding: 15px 15px 15px 60px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideInRule 0.5s ease forwards;
+    padding: 6px 0 6px 16px;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+    font-size: 13px;
 }
 
-.rules-content li:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.rules-content li:before {
-    content: '';
+.rules-list li:before {
+    content: '•';
     position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-color: var(--secondary-color);
-    border-radius: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 16px;
+    left: 0;
+    color: #60a5fa;
+    font-weight: bold;
+    font-size: 16px;
 }
 
-.rules-content li:nth-child(1):before {
-    content: '💰';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-}
-
-.rules-content li:nth-child(2):before {
-    content: '🎮';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-}
-
-.rules-content li:nth-child(3):before {
-    content: '🎲';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-}
-
-.rules-content li:nth-child(4):before {
-    content: '🔒';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-}
-
-.rules-content li:nth-child(5):before {
-    content: '💸';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-}
-
-.rules-content li:nth-child(6):before {
-    content: '🎁';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-}
-
-.rules-content li:nth-child(7):before {
-    content: '🏆';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: white;
+.rules-list li:last-child {
+    margin-bottom: 0;
 }
 
 .rules-footer {
-    margin-top: 25px;
+    margin-top: 20px;
     text-align: center;
     padding: 15px;
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     border-radius: 10px;
     color: white;
     font-weight: 500;
-    opacity: 0;
-    animation: fadeIn 0.5s ease 0.8s forwards;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.rules-footer {
-    animation: pulse 2s infinite;
+.rules-footer p {
+    margin: 0;
+    font-size: 14px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Animasi untuk modal aturan permainan */
+.rules-modal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInSection 0.5s ease forwards;
+}
+
+.rules-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInSection 0.5s ease forwards;
+}
+
+.rules-section:nth-child(1) { animation-delay: 0.1s; }
+.rules-section:nth-child(2) { animation-delay: 0.2s; }
+.rules-section:nth-child(3) { animation-delay: 0.3s; }
+.rules-section:nth-child(4) { animation-delay: 0.4s; }
+.rules-section:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInSection {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes fadeInScale {
     0% {
         opacity: 0;
@@ -954,62 +994,102 @@ body::after {
     }
 }
 
-.rules-content li {
-    animation-delay: 0.1s;
-}
-
-@keyframes slideInRule {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.rules-content li:nth-child(1) { animation-delay: 0.1s; }
-.rules-content li:nth-child(2) { animation-delay: 0.2s; }
-.rules-content li:nth-child(3) { animation-delay: 0.3s; }
-.rules-content li:nth-child(4) { animation-delay: 0.4s; }
-.rules-content li:nth-child(5) { animation-delay: 0.5s; }
-.rules-content li:nth-child(6) { animation-delay: 0.6s; }
-.rules-content li:nth-child(7) { animation-delay: 0.7s; }
-
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
 
-/* Responsif untuk layar kecil */
+/* Styling khusus untuk close button di modal aturan permainan */
+.rules-modal .close-modal {
+    background: rgba(239, 68, 68, 0.9);
+    color: #e2e8f0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.rules-modal .close-modal:hover {
+    background: rgba(239, 68, 68, 1);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsif untuk modal aturan permainan */
 @media (max-width: 768px) {
-    .game-board-container {
-        flex-direction: column;
+    .rules-modal {
+        max-width: 400px;
+        width: 90%;
+        margin: 0;
     }
     
-    .game-sidebar {
-        width: 100%;
+    .rules-header h2 {
+        font-size: 20px;
     }
     
-    .game-header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+    .rules-section {
+        padding: 12px;
+        margin-bottom: 15px;
     }
     
-    .game-controls {
-        width: 100%;
-        justify-content: center;
+    .rules-section h3 {
+        font-size: 14px;
     }
-    .game-board {
-        aspect-ratio: unset;
-        height: auto;
-        min-height: 400px;
-        overflow-x: auto;
-        overflow-y: visible;
-        max-height: none;
-        padding-bottom: 20px; /* agar tile bawah tidak terpotong */
+    
+    .rules-content {
+        font-size: 12px;
+    }
+    
+    .rules-section p {
+        font-size: 12px;
+    }
+    
+    .rules-list li {
+        font-size: 12px;
+        padding: 5px 0 5px 14px;
+    }
+    
+    .close-modal {
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+        top: 8px;
+        right: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rules-modal {
+        width: 95%;
+        max-width: 95%;
+        margin: 0;
+    }
+    
+    .rules-header h2 {
+        font-size: 18px;
+    }
+    
+    .rules-section {
+        padding: 10px;
+        margin-bottom: 12px;
+    }
+    
+    .rules-section h3 {
+        font-size: 13px;
+    }
+    
+    .rules-content {
+        font-size: 11px;
+    }
+    
+    .rules-section p {
+        font-size: 11px;
+    }
+    
+    .rules-list li {
+        font-size: 11px;
+        padding: 4px 0 4px 12px;
+    }
+    
+    .rules-footer p {
+        font-size: 12px;
     }
 }
 
@@ -1137,6 +1217,19 @@ body::after {
 
 .modal.active .card-modal {
     transform: scale(1);
+}
+
+/* Styling khusus untuk close button di modal kartu */
+.card-modal .close-modal {
+    background: rgba(239, 68, 68, 0.9);
+    color: #e2e8f0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-modal .close-modal:hover {
+    background: rgba(239, 68, 68, 1);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .card-header {
@@ -2725,4 +2818,7 @@ body::-webkit-scrollbar {
     display: inline-block;
     text-align: center;
 }
+
+
+
 
