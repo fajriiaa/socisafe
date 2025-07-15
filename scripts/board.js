@@ -422,7 +422,7 @@ const CYBER_CHANCE_CARDS = [
         id: 6,
         title: 'Akunmu Masuk Trending!',
         description: 'Kamu trending karena kampanye positif soal keamanan digital.',
-        actionText: 'Maju 4 langkah'
+        actionText: 'Maju 3 langkah'
     },
     {
         id: 7,
