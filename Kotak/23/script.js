@@ -332,7 +332,7 @@ function showTutorial() {
         </div>
       </div>
       <div class="tutorial-content">
-        Setiap kata yang benar akan memberikan <span class="tutorial-highlight">10 poin</span> dan penjelasan tentang ancaman malware tersebut.
+        Setiap kata yang benar akan memberikan <span class="tutorial-highlight">20 poin</span> dan penjelasan tentang ancaman malware tersebut.
       </div>
       <button class="tutorial-btn" onclick="startGame()">Mulai Bermain</button>
     </div>

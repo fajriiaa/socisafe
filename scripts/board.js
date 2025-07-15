@@ -229,7 +229,7 @@ const BOARD_DATA = [
         group: 'advanced-security',
         color: '#89A8B2',
         name: 'Digital Privacy',
-        description: 'Posting dan data punya aturan main! Yuk, pelajari UU ITE & PDP biar gak asal sebar',
+        description: 'Posting dan data punya aturan main! Yuk, pelajari PDP biar gak asal sebar',
         price: 300,
         position: { row: 1, col: 10 }
     },
@@ -249,7 +249,7 @@ const BOARD_DATA = [
         group: 'advanced-security',
         color: '#FF76CE',
         name: 'CyberLaw Puzzle',
-        description: 'Cari dan temukan istilah penting seputar UU PDP & UU ITE',
+        description: 'Cari dan temukan istilah penting seputar UU ITE',
         price: 320,
         position: { row: 4, col: 10 }
     },
@@ -346,7 +346,7 @@ const BOARD_DATA = [
         type: 'card',
         cardType: 'cyber-chance',
         name: 'CHANCE',
-        description: 'Kamu mendarat di Kotak Chance! Ambil kartunya dan lihat ke mana takdirmu membawamu...',
+        description: 'Kamu mendarat di Kotak Chance! Ambil kartunya dan lihat ke mana takdir membawamu...',
         position: { row: 10, col: 3 }
     },
     {
@@ -362,7 +362,7 @@ const BOARD_DATA = [
         type: 'card',
         cardType: 'cyber-chance',
         name: 'CHANCE',
-        description: 'Kamu mendarat di Kotak Chance! Ambil kartunya dan lihat ke mana takdirmu membawamu...',
+        description: 'Kamu mendarat di Kotak Chance! Ambil kartunya dan lihat ke mana takdir membawamu...',
         position: { row: 0, col: 2 }
     },
     {
@@ -378,7 +378,7 @@ const BOARD_DATA = [
         type: 'card',
         cardType: 'cyber-chance',
         name: 'CHANCE',
-        description: 'Kamu mendarat di Kotak Chance! Ambil kartunya dan lihat ke mana takdirmu membawamu...',
+        description: 'Kamu mendarat di Kotak Chance! Ambil kartunya dan lihat ke mana takdir membawamu...',
         position: { row: 6, col: 10 }
     }
     

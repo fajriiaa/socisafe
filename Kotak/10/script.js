@@ -39,7 +39,7 @@ UU ITE adalah peraturan yang mengatur informasi elektronik, transaksi elektronik
             law: "UU ITE Pasal 28 Ayat (1)",
             lawText: "Setiap Orang dengan sengaja dan tanpa hak menyebarkan berita bohong dan menyesatkan yang mengakibatkan kerugian konsumen dalam Transaksi Elektronik",
             penalty: "Pidana penjara maksimal 6 tahun dan/atau denda maksimal Rp1.000.000.000",
-            gamePoints: 300,
+            gamePoints: 200,
             gameMessage: "Anda telah melanggar UU ITE dengan menyebarkan informasi palsu!"
         },
         {
@@ -48,7 +48,7 @@ UU ITE adalah peraturan yang mengatur informasi elektronik, transaksi elektronik
             law: "UU PDP Pasal 65",
             lawText: "Setiap Orang dilarang secara melawan hukum mengungkapkan Data Pribadi yang bukan miliknya.",
             penalty: "Pidana penjara maksimal 5 tahun dan/atau denda maksimal Rp5.000.000.000",
-            gamePoints: 300,
+            gamePoints: 200,
             gameMessage: "Anda telah melanggar UU PDP dengan menyalahgunakan data pribadi orang lain!"
         }
     ];

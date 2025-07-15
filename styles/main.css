@@ -263,6 +263,7 @@ body::after {
     color: #f3f6fa !important;
     font-weight: 500;
     text-shadow: none;
+    margin-top: 20px; /* Tambahkan jarak ke atas agar sama dengan board game */
 }
 
 .player-info:hover, .game-actions:hover, .game-status:hover {

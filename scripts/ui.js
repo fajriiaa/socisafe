@@ -58,6 +58,7 @@ class UI {
         this.timerStart = null;
         this.timerRunning = false;
         this.missionComplete = false;
+        this.lastElapsedTime = null; // Tambahkan variabel untuk menyimpan waktu selesai
     }
 
     /**
@@ -750,7 +751,7 @@ class UI {
      * Tampilkan informasi kotak yang didatangi
      */
     showTileInfo(tileId, turnResult) {
-        // Khusus kotak Cyberpedia (id 5, 12, 28, 38), tunggu zoomOut SELESAI PASTI dengan callback, bukan setTimeout
+        // Khusus kotak Cyberpedia (id 5, 12, 28, 38), tunggu zoomOut SELESAI dengan callback, bukan setTimeout
         if ([5, 12, 28, 38].includes(parseInt(tileId))) {
             const boardContainer = document.querySelector('.game-board');
             if (boardContainer && boardContainer.classList.contains('zooming')) {
@@ -975,6 +976,12 @@ class UI {
             }
             return;
         }
+        // Setelah info kotak, jika pion di kotak 39, langsung jalankan processMinigame (untuk showGameCompletion)
+        const player = this.game.getPlayer();
+        if (player && player.position === 39) {
+            this.processMinigame();
+            return;
+        }
     }
 
     /**
@@ -1195,6 +1202,30 @@ class UI {
     }
 
     /**
+     * Ambil waktu selesai dalam detik
+     */
+    getElapsedTime() {
+        if (!this.timerStart) return 0;
+        if (this.timerRunning) {
+            return Math.floor((Date.now() - this.timerStart) / 1000);
+        } else {
+            // Simpan waktu selesai di localStorage jika mission complete
+            const elapsed = this.lastElapsedTime || 0;
+            return elapsed;
+        }
+    }
+
+    /**
+     * Format detik ke HH:MM:SS
+     */
+    formatTime(seconds) {
+        const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+        const s = String(seconds % 60).padStart(2, '0');
+        return `${h}:${m}:${s}`;
+    }
+
+    /**
      * Update tampilan jam
      */
     updateTimerDisplay(seconds) {
@@ -1312,6 +1343,9 @@ class UI {
             case 38:
                 this.game.playGameFromBox5('6,5% total penipuan pada 2024 menggunakan deepfake, termasuk suara/video palsu untuk menipu karyawan senior dan CEO.');
                 break;
+            case 39:
+                this.game.showGameCompletion();
+                break;
         }
         
         // Aktifkan kembali tombol lempar dadu setelah minigame dimulai
@@ -1324,6 +1358,10 @@ class UI {
         if (currentTile && currentTile.name && currentTile.name.toLowerCase().includes('mission complete')) {
             this.missionComplete = true;
             this.stopTimer();
+            // Simpan waktu selesai ke localStorage
+            const elapsed = Math.floor((Date.now() - this.timerStart) / 1000);
+            this.lastElapsedTime = elapsed;
+            localStorage.setItem('socisafe_finish_time', elapsed);
         }
     }
 

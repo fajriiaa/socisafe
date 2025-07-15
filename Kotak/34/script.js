@@ -163,7 +163,25 @@ function endGame() {
 
 // Fungsi untuk menangani klik tombol Selesai
 function handleSelesaiClick() {
+    // Kirim pesan ke parent dengan poin
     window.parent.postMessage({ type: 'gameCompleted', points: score }, '*');
+    
+    // Tutup tampilan minigame secara langsung
+    // Tambahkan animasi fade out sebelum menutup
+    const gameSection = document.getElementById('game-section');
+    if (gameSection) {
+        gameSection.style.transition = 'opacity 0.3s ease';
+        gameSection.style.opacity = '0';
+        setTimeout(() => {
+            // Sembunyikan seluruh halaman minigame
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                // Tutup iframe dengan mengirim pesan ke parent
+                window.parent.postMessage({ type: 'closeGame' }, '*');
+            }, 300);
+        }, 300);
+    }
 }
 
 // Inisialisasi grid

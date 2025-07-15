@@ -376,7 +376,7 @@ class Game {
                 else if (tile.id === 39) {
                     result.action = 'game-completion';
                     result.message += ` Selamat! Anda telah menyelesaikan perjalanan keamanan siber!`;
-                    this.showGameCompletion();
+                    // this.showGameCompletion(); // Dihapus, biar hanya UI yang handle
                 }
                 // Kotak 6 - menampilkan frame device quiz
                 else if (tile.id === 6) {
@@ -1154,8 +1154,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Congratulations!",
-                        desc: "Kamu berhasil menyelesaikan mini game quiz keamanan!",
+                        title: "Hebat!",
+                        desc: "Kamu berhasil bedain akun asli dan palsu",
                         points: points
                     });
                 }, 600);
@@ -1248,8 +1248,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Congratulations!",
-                        desc: "Kamu berhasil menyelesaikan mini game quiz keamanan!",
+                        title: "Good job!",
+                        desc: "Kamu nggak tinggal diam saat lihat akun mencurigakan",
                         points: points
                     });
                 }, 600);
@@ -1343,7 +1343,7 @@ class Game {
                 setTimeout(() => {
                     showMissionSuccess({
                         title: "Perhatian!",
-                        desc: "Anda harus mundur ke Kotak 11 untuk memahami bahaya penipuan akun palsu. Poin Anda berkurang 100!",
+                        desc: "Kamu tertipu akun palsu dan mengirimkan kredensial! Anda harus mundur ke Kotak 11.",
                         points: -100,
                         onClose: () => {
                             // Setelah popup ditutup, pion bergerak mundur satu per satu ke kotak 11, lalu tampilkan minigame kotak 11
@@ -1462,8 +1462,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Congratulations!",
-                        desc: "Kamu berhasil menyelesaikan materi privasi akun!",
+                        title: "Well done!",
+                        desc: "Akun aman dimulai dari privasi yang terjaga",
                         points: points
                     });
                 }, 600);
@@ -1576,7 +1576,7 @@ class Game {
                     }
                     
                     showMissionSuccess({
-                        title: "Congratulations!",
+                        title: "Great!",
                         desc: desc,
                         points: points
                     });
@@ -1679,7 +1679,7 @@ class Game {
                 setTimeout(() => {
                     showMissionSuccess({
                         title: "Perhatian!",
-                        desc: "Anda harus mundur ke Kotak 16 untuk memahami bahaya membagikan data pribadi di media sosial. Poin Anda berkurang 100!",
+                        desc: " Kamu masuk jebakan tren medsos. Data bocor, risiko terbuka! Balik ke Kotak 7.",
                         points: -100,
                         onClose: () => {
                             // Setelah popup ditutup, pion bergerak mundur satu per satu ke kotak 16, lalu tampilkan minigame kotak 16
@@ -2175,7 +2175,7 @@ class Game {
                 this.updatePlayerPoints();
                 showMissionSuccess({
                     title: "Perhatian!",
-                    desc: "Anda harus mundur ke Kotak 6 untuk memahami cara mengenali dan menghindari serangan phishing.",
+                    desc: "Serangan berhasil! Kamu kena jebakan phishing. Mundur ke Kotak 6.",
                     points: -100,
                     onClose: () => {
                         // Mulai animasi pergerakan mundur dari kotak 9 ke kotak 6 setelah user klik close
@@ -2291,7 +2291,7 @@ class Game {
                 this.player.addPoints(points);
                 showMissionSuccess({
                     title: "Congratulations!",
-                    desc: "Kamu berhasil menyelesaikan mini game deteksi phishing!",
+                    desc: "Kamu jago banget! Phishing berhasil dipatahkan!",
                     points: points
                 });
                 this.updatePlayerPoints();
@@ -2486,7 +2486,7 @@ class Game {
         const messageHandler = (event) => {
             if (event.data.type === 'gameCompleted') {
                 // Kurangi poin 200
-                this.player.deductPoints(200);
+                this.player.deductPoints(100);
                 this.updatePlayerPoints();
                 window.removeEventListener('message', messageHandler);
                 // Tutup overlay dulu, baru tampilkan popup perhatian
@@ -2494,8 +2494,8 @@ class Game {
                 setTimeout(() => {
                     showMissionSuccess({
                         title: "Perhatian!",
-                        desc: "Anda harus mundur ke Kotak 21 untuk memahami bahaya menginstall aplikasi dari sumber tidak dikenal. Poin Anda berkurang 200!",
-                        points: -200,
+                        desc: "Kamu instal APK sembarangan... dan boom! Malware masuk. Mundur ke Kotak 21.",
+                        points: -100,
                         onClose: () => {
                             // Setelah popup ditutup, pion bergerak mundur satu per satu ke kotak 21, lalu tampilkan minigame kotak 21
                             if (this.ui) {
@@ -2613,8 +2613,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Congratulations!",
-                        desc: "Kamu berhasil menyelesaikan mini game quiz keamanan!",
+                        title: "Well done!",
+                        desc: "Semua kata terpecahkan! Kamu siap hadapi ancaman malware.",
                         points: points
                     });
                 }, 600);
@@ -2715,8 +2715,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Congratulations!",
-                        desc: "Kamu berhasil menyelesaikan mini game quiz keamanan!",
+                        title: "Nice!",
+                        desc: "Deepfake? Kamu udah gak gampang ketipu lagi",
                         points: points
                     });
                 }, 600);
@@ -2817,8 +2817,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Congratulations!",
-                        desc: "Kamu berhasil menyelesaikan mini game quiz keamanan!",
+                        title: "Nice!",
+                        desc: "Kamu udah jago bedain mana yang asli, mana yang palsu.",
                         points: points
                     });
                 }, 600);
@@ -2912,7 +2912,7 @@ class Game {
         const messageHandler = (event) => {
             if (event.data.type === 'gameCompleted') {
                 // Kurangi poin 200
-                this.player.deductPoints(200);
+                this.player.deductPoints(100);
                 this.updatePlayerPoints();
                 window.removeEventListener('message', messageHandler);
                 // Tutup overlay dulu, baru tampilkan popup perhatian
@@ -2920,8 +2920,8 @@ class Game {
                 setTimeout(() => {
                     showMissionSuccess({
                         title: "Perhatian!",
-                        desc: "Anda terkena penipuan deepfake. Poin Anda berkurang 200! Pion Anda mundur ke kotak 26 untuk memahami lebih lanjut tentang bahaya deepfake.",
-                        points: -200,
+                        desc: "Deepfake berhasil menipumu. Konten palsu bisa sangat meyakinkan!",
+                        points: -100,
                         onClose: () => {
                             // Setelah popup ditutup, pion bergerak mundur ke kotak 26, lalu tampilkan minigame kotak 26
                             if (this.ui) {
@@ -3039,8 +3039,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Congratulations!",
-                        desc: "Kamu berhasil menyelesaikan mini game quiz keamanan!",
+                        title: "Great!",
+                        desc: "Sekarang kamu lebih siap jaga datamu",
                         points: points
                     });
                 }, 600);
@@ -3134,7 +3134,7 @@ class Game {
         const messageHandler = (event) => {
             if (event.data.type === 'gameCompleted') {
                 // Kurangi poin 200
-                this.player.deductPoints(200);
+                this.player.deductPoints(100);
                 this.updatePlayerPoints();
                 window.removeEventListener('message', messageHandler);
                 // Tutup overlay dulu, baru tampilkan popup perhatian
@@ -3142,8 +3142,8 @@ class Game {
                 setTimeout(() => {
                     showMissionSuccess({
                         title: "Perhatian!",
-                        desc: "Anda harus mundur ke Kotak 31 untuk memahami bahaya investigasi data pribadi. Poin Anda berkurang 200!",
-                        points: -200,
+                        desc: "Kamu menggunakan identitas orang lain tanpa izin! Mundur ke Kotak 31.",
+                        points: -100,
                         onClose: () => {
                             // Setelah popup ditutup, pion bergerak mundur ke kotak 31, lalu tampilkan minigame kotak 31
                             if (this.ui) {
@@ -3175,7 +3175,6 @@ class Game {
     playGameFromBox34() {
         // Mencegah scrolling pada body
         document.body.style.overflow = 'hidden';
-        
         // Buat overlay untuk frame device
         const overlay = document.createElement('div');
         overlay.className = 'device-overlay';
@@ -3197,6 +3196,12 @@ class Game {
                 justify-content: center;
                 padding: 0;
                 margin: 0;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .device-overlay.closing {
+                opacity: 0;
+                background: rgba(30,41,59,0);
+                backdrop-filter: blur(0px);
             }
             .device-iframe {
                 border: none;
@@ -3207,7 +3212,12 @@ class Game {
                 padding: 0;
                 display: block;
                 overflow: hidden;
+                transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
                 animation: devicePopIn 0.6s cubic-bezier(0.4,0,0.2,1);
+            }
+            .device-overlay.closing .device-iframe {
+                transform: scale(0.8);
+                opacity: 0;
             }
             @keyframes devicePopIn {
                 0% {
@@ -3226,6 +3236,39 @@ class Game {
         `;
         document.head.appendChild(style);
         document.body.appendChild(overlay);
+        // Fungsi untuk menutup overlay dengan animasi smooth
+        const closeOverlayWithAnimation = () => {
+            overlay.classList.add('closing');
+            setTimeout(() => {
+                const overlayEl = document.querySelector('.device-overlay');
+                const styleEl = [...document.head.querySelectorAll('style')].find(s => s.textContent.includes('.device-overlay'));
+                if (overlayEl) overlayEl.remove();
+                if (styleEl) styleEl.remove();
+                document.body.style.overflow = '';
+            }, 600);
+        };
+        // Event listener untuk pesan dari iframe (game selesai)
+        const messageHandler = (event) => {
+            if (event.data.type === 'gameCompleted') {
+                const points = event.data.points !== undefined ? event.data.points : 100;
+                this.player.addPoints(points);
+                this.updatePlayerPoints();
+                // Tutup overlay dulu, baru tampilkan pesan sukses
+                closeOverlayWithAnimation();
+                setTimeout(() => {
+                    showMissionSuccess({
+                        title: "Well done!",
+                        desc: "Puzzle UU ITE berhasil kamu pecahkan. Pengetahuan digitalmu naik level!",
+                        points: points
+                    });
+                }, 600);
+            } else if (event.data.type === 'closeGame') {
+                // Tutup overlay langsung tanpa pesan sukses
+                closeOverlayWithAnimation();
+                window.removeEventListener('message', messageHandler);
+            }
+        };
+        window.addEventListener('message', messageHandler);
     }
 
     /**
@@ -3312,8 +3355,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Selamat!",
-                        desc: "Password berhasil diperbarui.",
+                        title: "Nice!",
+                        desc: "Password berhasil diperbarui. Akunmu kembali aman!",
                         points: points
                     });
                 }, 600);
@@ -3416,8 +3459,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Selamat!",
-                        desc: "Password berhasil diperbarui.",
+                        title: "Nice!",
+                        desc: "Password berhasil diperbarui. Akunmu kembali aman!",
                         points: points
                     });
                 }, 600);
@@ -3521,8 +3564,8 @@ class Game {
                 closeOverlayWithAnimation();
                 setTimeout(() => {
                     showMissionSuccess({
-                        title: "Selamat!",
-                        desc: "Game keamanan berhasil diselesaikan.",
+                        title: "Nice!",
+                        desc: "Password berhasil diperbarui. Akunmu kembali aman!",
                         points: points
                     });
                 }, 600);
@@ -4498,6 +4541,15 @@ class Game {
             // Tampilkan Hall of Fame dengan animasi yang menarik
             const hallOfFameOverlay = document.createElement('div');
             hallOfFameOverlay.className = 'hall-of-fame-overlay';
+            // Ambil waktu selesai dari localStorage
+            let finishSeconds = parseInt(localStorage.getItem('socisafe_finish_time') || '0', 10);
+            function formatTime(seconds) {
+                const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+                const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+                const s = String(seconds % 60).padStart(2, '0');
+                return `${h}:${m}:${s}`;
+            }
+            const finishTimeText = finishSeconds > 0 ? `<div class="hof-time">Waktu Selesai: <b>${formatTime(finishSeconds)}</b></div>` : '';
             hallOfFameOverlay.innerHTML = `
                 <div class="hall-of-fame-container">
                     <div class="hall-of-fame-header">
@@ -4510,25 +4562,12 @@ class Game {
                             <div class="hof-info">
                                 <div class="hof-name">${this.player.name}</div>
                                 <div class="hof-points">${this.player.points} Poin</div>
+                                ${finishTimeText}
                                 <div class="hof-title">Cyber Guardian</div>
                             </div>
                         </div>
                         <div class="hof-message">
                             <p>Selamat! Anda telah berhasil menyelesaikan semua tantangan keamanan siber dan menjadi Cyber Guardian yang handal.</p>
-                        </div>
-                        <div class="hof-achievements">
-                            <div class="achievement-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Keamanan Digital</span>
-                            </div>
-                            <div class="achievement-item">
-                                <i class="fas fa-user-secret"></i>
-                                <span>Privasi Terjaga</span>
-                            </div>
-                            <div class="achievement-item">
-                                <i class="fas fa-gavel"></i>
-                                <span>Hukum Siber</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -4715,6 +4754,14 @@ class Game {
                     }
                 }, 300);
             };
+            hofStyle.textContent += `
+                .hof-time {
+                    font-size: 15px;
+                    color: #fff;
+                    margin-bottom: 5px;
+                    font-weight: 500;
+                }
+            `;
         };
     }
     
