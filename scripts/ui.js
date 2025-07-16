@@ -168,6 +168,11 @@ class UI {
             this.displayedCard.classList.toggle('flipped');
         });
         
+        // Event listener untuk window resize - update ukuran token
+        window.addEventListener('resize', () => {
+            this.updateTokenSize();
+        });
+        
         // Tombol OK pada kartu
         this.cardButton.addEventListener('click', (e) => {
             e.stopPropagation(); // Mencegah event klik menyebar ke kartu
@@ -368,6 +373,25 @@ class UI {
     }
 
     /**
+     * Update ukuran token pemain berdasarkan ukuran layar
+     */
+    updateTokenSize() {
+        const token = document.querySelector('.player-token');
+        if (!token) return;
+        
+        // Tentukan ukuran scale berdasarkan ukuran layar
+        let scaleValue = 0.32; // ukuran default untuk desktop
+        if (window.innerWidth <= 768) {
+            scaleValue = 0.25; // ukuran untuk tablet
+        }
+        if (window.innerWidth <= 480) {
+            scaleValue = 0.2; // ukuran untuk mobile
+        }
+        
+        token.style.transform = `translate(-50%, -30%) scale(${scaleValue})`;
+    }
+
+    /**
      * Render token pemain di papan
      */
     renderPlayerToken() {
@@ -470,12 +494,25 @@ class UI {
         
         token.innerHTML = characterHTML;
         
-        // Posisikan token di tengah tile
+        // Posisikan token di tengah tile dengan ukuran responsive
         token.style.left = '50%';
         token.style.top = '50%';
-        token.style.transform = 'translate(-50%, -30%) scale(0.32)';
+        
+        // Tentukan ukuran scale berdasarkan ukuran layar
+        let scaleValue = 0.32; // ukuran default untuk desktop
+        if (window.innerWidth <= 768) {
+            scaleValue = 0.25; // ukuran untuk tablet
+        }
+        if (window.innerWidth <= 480) {
+            scaleValue = 0.2; // ukuran untuk mobile
+        }
+        
+        token.style.transform = `translate(-50%, -30%) scale(${scaleValue})`;
         
         tileElement.appendChild(token);
+        
+        // Update ukuran token setelah ditambahkan ke DOM
+        this.updateTokenSize();
     }
 
     /**
