@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Safe</title>
+    <title>Bermain Board Game - SociSafe</title>
+    <link rel="icon" type="image/png" href="assets/images/profil/ikonsocisafe.png">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/scrollbar.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +21,7 @@
             <h1>Lumyx</h1>
             <div id="gameTimer" class="game-timer">00:00:00</div>
             <div class="game-controls">
+                <button id="settingsBtn" class="btn btn-secondary">Pengaturan</button>
                 <button id="rulesBtn" class="btn btn-secondary">Aturan</button>
                 <button id="restartGame" class="btn btn-primary">Mulai Ulang</button>
             </div>
@@ -158,6 +160,53 @@
             </div>
             <div class="rules-footer">
                 <p>Selamat bermain dan jadilah ahli keamanan siber terbaik!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk pengaturan -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content settings-modal">
+            <span class="close-modal">&times;</span>
+            <div class="settings-header">
+                <h2>Pengaturan Permainan</h2>
+                <p class="settings-subtitle">Kustomisasi pengalaman bermain Anda</p>
+            </div>
+            <div class="settings-content">
+                <div class="settings-section">
+                    <h3>Pengaturan Audio</h3>
+                    <div class="setting-item">
+                        <label for="soundEnabled">Suara Efek</label>
+                        <input type="checkbox" id="soundEnabled" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label for="musicEnabled">Musik Latar</label>
+                        <input type="checkbox" id="musicEnabled" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label for="volumeControl">Volume</label>
+                        <input type="range" id="volumeControl" min="0" max="100" value="70">
+                        <span id="volumeValue">70%</span>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>Pengaturan Visual</h3>
+                    <div class="setting-item">
+                        <label for="colorTheme">Tema Warna</label>
+                        <select id="colorTheme">
+                            <option value="default" selected>Default</option>
+                            <option value="dark">Gelap</option>
+                            <option value="light">Terang</option>
+                        </select>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="settings-footer">
+                <button id="resetSettings" class="btn btn-secondary">Reset Default</button>
+                <button id="saveSettings" class="btn btn-primary">Simpan Pengaturan</button>
             </div>
         </div>
     </div>

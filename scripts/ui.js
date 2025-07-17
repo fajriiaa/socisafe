@@ -15,8 +15,10 @@ class UI {
 
         this.restartGameBtn = document.getElementById('restartGame');
         this.rulesBtn = document.getElementById('rulesBtn');
+        this.settingsBtn = document.getElementById('settingsBtn');
         this.rollDiceBtn = document.getElementById('rollDice');
         this.rulesModal = document.getElementById('rulesModal');
+        this.settingsModal = document.getElementById('settingsModal');
         this.closeModalBtns = document.querySelectorAll('.close-modal');
         
         // Elemen kartu
@@ -76,6 +78,11 @@ class UI {
             this.showRulesModal();
         });
         
+        // Tombol pengaturan
+        this.settingsBtn.addEventListener('click', () => {
+            this.showSettingsModal();
+        });
+        
         // Tombol tutup modal
         this.closeModalBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -86,6 +93,9 @@ class UI {
         // Klik di luar modal untuk menutup
         window.addEventListener('click', (e) => {
             if (e.target === this.rulesModal) {
+                this.hideModals();
+            }
+            if (e.target === this.settingsModal) {
                 this.hideModals();
             }
         });
@@ -299,6 +309,13 @@ class UI {
      */
     showRulesModal() {
         this.rulesModal.classList.add('active');
+        document.body.classList.add('modal-open');
+    }
+    
+    showSettingsModal() {
+        this.settingsModal.classList.add('active');
+        document.body.classList.add('modal-open');
+        this.loadSettings();
     }
 
     /**
@@ -306,6 +323,8 @@ class UI {
      */
     hideModals() {
         this.rulesModal.classList.remove('active');
+        this.settingsModal.classList.remove('active');
+        document.body.classList.remove('modal-open');
     }
 
     /**
@@ -346,6 +365,13 @@ class UI {
         }
         
         this.gameStarted = true;
+        this.updateCardDeckStates();
+        
+        // Load dan terapkan pengaturan
+        const settings = this.getSettings();
+        this.applySettings(settings);
+        
+        console.log('Permainan dimulai!');
     }
 
     /**
@@ -1571,6 +1597,173 @@ class UI {
         } else {
             this.zoomToPlayer(doMove);
         }
+    }
+    
+    // Method untuk mengelola pengaturan
+    loadSettings() {
+        // Load pengaturan dari localStorage
+        const settings = JSON.parse(localStorage.getItem('gameSettings')) || this.getDefaultSettings();
+        
+        // Set nilai pengaturan ke form
+        document.getElementById('soundEnabled').checked = settings.soundEnabled;
+        document.getElementById('musicEnabled').checked = settings.musicEnabled;
+        document.getElementById('volumeControl').value = settings.volume;
+        document.getElementById('volumeValue').textContent = settings.volume + '%';
+        document.getElementById('colorTheme').value = settings.colorTheme;
+        
+        // Tambahkan event listeners untuk pengaturan
+        this.initSettingsEventListeners();
+    }
+    
+    getDefaultSettings() {
+        return {
+            soundEnabled: true,
+            musicEnabled: true,
+            volume: 70,
+            colorTheme: 'default'
+        };
+    }
+    
+    initSettingsEventListeners() {
+        // Event listener untuk volume control
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeValue = document.getElementById('volumeValue');
+        
+        // Hapus event listener yang mungkin sudah ada
+        volumeControl.removeEventListener('input', this.volumeChangeHandler);
+        
+        // Buat handler baru
+        this.volumeChangeHandler = (e) => {
+            const value = e.target.value;
+            volumeValue.textContent = value + '%';
+        };
+        
+        volumeControl.addEventListener('input', this.volumeChangeHandler);
+        
+        // Event listener untuk tombol reset
+        const resetBtn = document.getElementById('resetSettings');
+        resetBtn.removeEventListener('click', this.resetSettingsHandler);
+        
+        this.resetSettingsHandler = () => {
+            const defaultSettings = this.getDefaultSettings();
+            localStorage.setItem('gameSettings', JSON.stringify(defaultSettings));
+            this.loadSettings();
+            this.showNotification('Pengaturan telah direset ke default');
+        };
+        
+        resetBtn.addEventListener('click', this.resetSettingsHandler);
+        
+        // Event listener untuk tombol simpan
+        const saveBtn = document.getElementById('saveSettings');
+        saveBtn.removeEventListener('click', this.saveSettingsHandler);
+        
+        this.saveSettingsHandler = () => {
+            this.saveSettings();
+            this.hideModals();
+            this.showNotification('Pengaturan berhasil disimpan');
+        };
+        
+        saveBtn.addEventListener('click', this.saveSettingsHandler);
+    }
+    
+    saveSettings() {
+        const settings = {
+            soundEnabled: document.getElementById('soundEnabled').checked,
+            musicEnabled: document.getElementById('musicEnabled').checked,
+            volume: parseInt(document.getElementById('volumeControl').value),
+            colorTheme: document.getElementById('colorTheme').value
+        };
+        
+        localStorage.setItem('gameSettings', JSON.stringify(settings));
+        
+        // Terapkan pengaturan yang disimpan
+        this.applySettings(settings);
+    }
+    
+    applySettings(settings) {
+        // Terapkan pengaturan audio
+        if (!settings.soundEnabled) {
+            // Nonaktifkan suara efek
+            console.log('Suara efek dinonaktifkan');
+        }
+        
+        if (!settings.musicEnabled) {
+            // Nonaktifkan musik latar
+            console.log('Musik latar dinonaktifkan');
+        }
+        
+        // Terapkan volume
+        console.log('Volume diset ke:', settings.volume + '%');
+        
+        // Terapkan tema warna
+        this.applyColorTheme(settings.colorTheme);
+    }
+    
+    applyColorTheme(theme) {
+        const root = document.documentElement;
+        
+        switch(theme) {
+            case 'dark':
+                root.style.setProperty('--primary-color', '#1a1a1a');
+                root.style.setProperty('--secondary-color', '#2d3748');
+                root.style.setProperty('--light-color', '#2d3748');
+                root.style.setProperty('--dark-color', '#1a1a1a');
+                break;
+            case 'light':
+                root.style.setProperty('--primary-color', '#f7fafc');
+                root.style.setProperty('--secondary-color', '#e2e8f0');
+                root.style.setProperty('--light-color', '#ffffff');
+                root.style.setProperty('--dark-color', '#4a5568');
+                break;
+            default:
+                // Reset ke default
+                root.style.setProperty('--primary-color', '#2c3e50');
+                root.style.setProperty('--secondary-color', '#3498db');
+                root.style.setProperty('--light-color', '#ecf0f1');
+                root.style.setProperty('--dark-color', '#2c3e50');
+                break;
+        }
+    }
+    
+    showNotification(message) {
+        // Buat elemen notifikasi
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            font-size: 14px;
+            font-weight: 500;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+    
+    getSettings() {
+        return JSON.parse(localStorage.getItem('gameSettings')) || this.getDefaultSettings();
     }
 }
 
